@@ -1,12 +1,12 @@
-// Tamanho do tabuleiro
+//tabuleiro
 const linhas = 10;
 const colunas = 10;
 
-// Posição inicial do robô
+// Inicio do robô
 let roboLinha = 0;
 let roboColuna = 4;
 
-// Função para criar o tabuleiro vazio
+// Função criar o tabuleiro 
 function criarQuadrado(linhas, colunas) {
   const rastro = [];
   for (let i = 0; i < linhas; i++) {
@@ -19,7 +19,7 @@ function criarQuadrado(linhas, colunas) {
   return rastro;
 }
 
-// Função para imprimir o tabuleiro
+// Função imprimir o tabuleiro
 function roboAndou(rastro) {
   for (let i = 0; i < rastro.length; i++) {
     console.log(rastro[i].join(' '));
@@ -33,21 +33,21 @@ function moverFrente() {
   }
 }
 
-// Função para mover o robô para a esquerda
+// Função mover o robô para a direita
 function moverDireita() {
   if (roboColuna > 0) {
     roboColuna--;
   }
 }
 
-// Função para mover o robô para a direita
+// Função mover o robô para a esquerda
 function moverEsquerda() {
   if (roboColuna < colunas - 1) {
     roboColuna++;
   }
 }
 
-// Função principal
+// Função main
 function main() {
   const rastro = criarQuadrado(linhas, colunas);
 
@@ -73,10 +73,10 @@ function main() {
   moverFrente();
   
 
-  // Atualiza a posição do robô no tabuleiro
+  // Posição do robô atualizada
   rastro[roboLinha][roboColuna] = 'R';
 
-  // Imprime o tabuleiro após os movimentos
+  // Resultado do robo no tabuleiro
   console.log('Tabuleiro após os movimentos:');
   roboAndou(rastro);
 }
