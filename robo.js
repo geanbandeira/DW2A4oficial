@@ -1,12 +1,10 @@
-//tabuleiro
 const linhas = 10;
 const colunas = 10;
 
-// Inicio do robô
-let roboLinha = 0;
+let roboLinha = 9;
 let roboColuna = 4;
+let direcao = 'emfrente';
 
-// Função criar o tabuleiro 
 function criarQuadrado(linhas, colunas) {
   const rastro = [];
   for (let i = 0; i < linhas; i++) {
@@ -19,67 +17,74 @@ function criarQuadrado(linhas, colunas) {
   return rastro;
 }
 
-// Função imprimir o tabuleiro
 function roboAndou(rastro) {
   for (let i = 0; i < rastro.length; i++) {
     console.log(rastro[i].join(' '));
   }
 }
 
-// Função para mover o robô para frente
 function moverFrente() {
-  if (roboLinha < linhas - 1) {
-    roboLinha++;
+  let novaLinha = roboLinha;
+  let novaColuna = roboColuna;
+
+  switch (direcao) {
+    case 'emfrente':
+      novaLinha--;
+      break;
+    case 'direita':
+      novaColuna++;
+      break;
+    case 'parabaixo':
+      novaLinha++;
+      break;
+    case 'esquerda':
+      novaColuna--;
+      break;
+  }
+
+  if (novaLinha >= 0 && novaLinha < linhas && novaColuna >= 0 && novaColuna < colunas) {
+    roboLinha = novaLinha;
+    roboColuna = novaColuna;
+  } else {
+    console.log("Limite do tabuleiro alcançado!");
   }
 }
 
-// Função mover o robô para a direita
-function moverDireita() {
-  if (roboColuna > 0) {
-    roboColuna--;
+function girarHorario() {
+  switch (direcao) {
+    case 'emfrente':
+      direcao = 'direita';
+      break;
+    case 'direita':
+      direcao = 'parabaixo';
+      break;
+    case 'parabaixo':
+      direcao = 'esquerda';
+      break;
+    case 'esquerda':
+      direcao = 'emfrente';
+      break;
   }
 }
 
-// Função mover o robô para a esquerda
-function moverEsquerda() {
-  if (roboColuna < colunas - 1) {
-    roboColuna++;
-  }
-}
-
-// Função main
 function main() {
   const rastro = criarQuadrado(linhas, colunas);
 
-  // Coloca o robô na posição inicial
   rastro[roboLinha][roboColuna] = 'R';
 
-  // Imprime o tabuleiro inicial
   console.log('Tabuleiro inicial:');
   roboAndou(rastro);
 
-  // Movimentos do robô
-  //moverFrente();
-  //moverDireita();
-  //moverEsquerda();
   moverFrente();
   moverFrente();
+  girarHorario();
+  girarHorario();
   moverFrente();
-  moverFrente();
-  moverEsquerda();
-  moverEsquerda();
-  moverDireita();
-  moverFrente();
-  moverFrente();
-  
 
-  // Posição do robô atualizada
   rastro[roboLinha][roboColuna] = 'R';
 
-  // Resultado do robo no tabuleiro
   console.log('Tabuleiro após os movimentos:');
   roboAndou(rastro);
 }
 
-// Executa o programa
 main();
